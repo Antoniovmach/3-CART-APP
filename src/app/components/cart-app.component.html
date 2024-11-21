@@ -1,0 +1,30 @@
+
+<navbar [items]='items' (openCart)="openShowCart()"/>
+<div class="container my-4">
+
+  <h1>Catalogo de productos</h1>
+  <!-- <button class="btn btn-info" (click)="openShowCart()">Mostrar carro ({{items.length}})</button> -->
+  <div class="row">
+    <div [className]="showCart?'col-9':'col'">
+      <catalogo [products]="products" (productEventEmitter)="onAddCart($event)" />
+    </div>
+
+
+    @if (showCart) {
+
+    <div class="col-3">
+      <button class="btn btn-secondary float-end" (click)="openShowCart()">X</button>
+      @if (items.length>0)
+      {
+
+      <cart [items]="items" (idProductEventEmitter)="onDeleteCart($event)" [total]="total" />
+
+      } @else {
+      <div class="alert alert-warning"> no hay elementos en el carro</div>
+      }
+    </div>
+
+    }
+
+  </div>
+</div>
